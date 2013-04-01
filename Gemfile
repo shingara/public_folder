@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'rails', '3.2.12'
+gem 'state_machine'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -22,6 +23,10 @@ end
 
 group :development, :test do
   gem 'rspec-rails'
+end
+
+group :test do
+  gem 'shoulda-matchers', :require => false
 end
 
 
