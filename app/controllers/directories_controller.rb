@@ -5,7 +5,9 @@ class DirectoriesController < ApplicationController
     DirectoryDecorator.new(directory)
   }
 
-  def new; end
+  def new
+    directory.dirname = params[:dirname] || ''
+  end
 
   def create
     if directory.save
@@ -18,7 +20,7 @@ class DirectoriesController < ApplicationController
   private
 
   def directory_params
-    params.require(:directory).permit(:name)
+    params.require(:directory).permit(:name, :dirname)
   end
 
 end

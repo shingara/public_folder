@@ -1,5 +1,13 @@
-%p= link_to t('.add_directory'), new_directory_url, :class => 'btn btn-primary'
+%p= link_to t('.add_directory'), new_directory_url(:dirname => node_decorate.full_path), :class => 'btn btn-primary'
 
-= node.ls do |node|
+%ul.breadcrumb
+  - node_decorate.parents.each do |parent|
+    %li
+      = link_to parent.name, parent.url
+      %span.divider= "/"
+  %li
+    = link_to node_decorate.name, node_decorate.url
+
+- node_decorate.ls.each do |n|
   .row-fluid
-    .span4= node.name
+    .span4= n.name

@@ -1,5 +1,6 @@
 = simple_form_for(directory, :html => {:class => 'form-horizontal' }) do |form|
   %legend= t('.new_directory')
   %fieldset
+    = form.hidden_field :dirname
     = form.input :name
     = form.button :submit, t('.create_directory')
