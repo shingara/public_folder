@@ -14,10 +14,10 @@
 ActiveRecord::Schema.define(:version => 20130401124331) do
 
   create_table "nodes", :force => true do |t|
-    t.string   "name"
+    t.string   "name",       :null => false
     t.integer  "parent_id"
     t.string   "file_type"
-    t.string   "full_path"
+    t.string   "full_path",  :null => false
     t.integer  "size"
     t.string   "type"
     t.datetime "created_at", :null => false

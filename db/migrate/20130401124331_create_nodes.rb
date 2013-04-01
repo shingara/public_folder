@@ -5,7 +5,7 @@ class CreateNodes < ActiveRecord::Migration
       t.integer :parent_id
       t.string :file_type
       t.string :full_path, :null => false
-      t.integer :size, :null => false
+      t.integer :size
       t.string :type
 
       t.timestamps

@@ -31,6 +31,7 @@ end
 
 group :development, :test do
   gem 'rspec-rails'
+  gem 'coveralls', :require => false
   gem 'better_errors'
   gem "binding_of_caller"
 end
