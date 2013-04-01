@@ -4,8 +4,9 @@ class CreateNodes < ActiveRecord::Migration
       t.string :name
       t.integer :parent_id
       t.string :file_type
-      t.datetime :created_at
+      t.string :full_path
       t.integer :size
+      t.string :type
 
       t.timestamps
     end

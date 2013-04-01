@@ -3,3 +3,15 @@
 
 en:
   hello: "Hello world"
+  nodes:
+    index:
+      add_directory: "Add directory"
+
+  simple_form:
+    labels:
+      directory:
+        name: Name
+
+  directories:
+    new:
+      create_directory: Create directory

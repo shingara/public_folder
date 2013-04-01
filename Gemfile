@@ -3,6 +3,14 @@ source 'https://rubygems.org'
 gem 'rails', '3.2.12'
 gem 'state_machine'
 
+
+gem 'haml'
+gem 'twitter-bootstrap-rails'
+gem 'simple_form'
+gem 'decent_exposure'
+gem 'strong_parameters'
+gem 'draper'
+
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
@@ -27,9 +35,8 @@ end
 
 group :test do
   gem 'shoulda-matchers', :require => false
+  gem 'capybara', :require => false
 end
-
-
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

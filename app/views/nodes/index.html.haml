@@ -1,0 +1,5 @@
+%p= link_to t('.add_directory'), new_directory_url, :class => 'btn btn-primary'
+
+= node.ls do |node|
+  .row-fluid
+    .span4= node.name

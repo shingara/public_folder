@@ -17,8 +17,10 @@ ActiveRecord::Schema.define(:version => 20130401124331) do
     t.string   "name"
     t.integer  "parent_id"
     t.string   "file_type"
-    t.datetime "created_at", :null => false
+    t.string   "full_path"
     t.integer  "size"
+    t.string   "type"
+    t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
 
