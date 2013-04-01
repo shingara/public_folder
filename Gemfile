@@ -1,8 +1,6 @@
 source 'https://rubygems.org'
 
 gem 'rails', '3.2.12'
-gem 'state_machine'
-
 
 gem 'haml'
 gem 'twitter-bootstrap-rails'
