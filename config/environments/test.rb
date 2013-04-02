@@ -34,4 +34,6 @@ PublicFolder::Application.configure do
 
   # Print deprecation notices to the stderr
   config.active_support.deprecation = :stderr
+
+  config.file_system = Rails.root.join('test_persist')
 end

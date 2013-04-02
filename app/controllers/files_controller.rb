@@ -2,7 +2,7 @@ class FilesController < ApplicationController
 
   expose(:file, :attributes => :file_params, :model => :node)
   expose(:file_decorate) {
-    FileDecorator.new(file)
+    NodeDecorator.new(file)
   }
 
   def new
@@ -20,7 +20,7 @@ class FilesController < ApplicationController
   private
 
   def file_params
-    params.require(:file).permit(:content, :dirname)
+    params.require(:node).permit(:dirname, :content)
   end
 
 end

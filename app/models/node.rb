@@ -1,5 +1,5 @@
 class Node < ActiveRecord::Base
-  attr_accessible :file_type, :name, :dirname
+  attr_accessible :file_type, :name, :dirname, :content
 
   validates_presence_of :file_type, :size
   validates_uniqueness_of :name, :scope => :parent_id
@@ -35,6 +35,7 @@ class Node < ActiveRecord::Base
 
   def dirname=(path)
     self.parent = Node.get(path)
+    @dirname = path
   end
 
   def dirname
@@ -46,6 +47,10 @@ class Node < ActiveRecord::Base
     filesystem.save
   end
   attr_reader :content
+
+  def directory?
+    false
+  end
 
   def self.get(path)
     path = (path || '').split('/')

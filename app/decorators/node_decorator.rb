@@ -5,13 +5,13 @@ class NodeDecorator < Draper::Decorator
     h.link_to model.name, url
   end
 
-  def decorate
+  def directory_decorate
     if model.directory?
       DirectoryDecorator.new(model)
     else
-      self
+      DirectoryDecorator.new(model.parent)
     end
   end
-  delegate :url, :to => :decorate
+  delegate :url, :to => :directory_decorate
 
 end
