@@ -5,14 +5,6 @@ class Directory < Node
     self.size = 0
   end
 
-  def dirname=(path)
-    self.parent = Node.get(path)
-  end
-
-  def dirname
-    @dirname ||= parent.full_path
-  end
-
   def directory?; true; end
 
 end

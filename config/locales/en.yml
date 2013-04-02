@@ -2,15 +2,21 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
-  hello: "Hello world"
   nodes:
     index:
       add_directory: "Add directory"
+      add_file: "Add file"
 
   simple_form:
     labels:
       directory:
         name: Name
+      node:
+        content: Fichier
+
+  files:
+    new:
+      add_file: Add file
 
   directories:
     new:

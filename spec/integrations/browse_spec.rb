@@ -14,6 +14,16 @@ feature "Browse and update directory" do
       }.by(1)
     end
     page.should have_css 'ul.breadcrumb li', :text => 'foo'
+
+    click_on(I18n.t('nodes.index.add_file'))
+    within "#new_file" do
+      fill_in I18n.t('simple_form.labels.node.content'), :with => Rails.root.join('app/assets/images/rails.jpg')
+      expect {
+        click_on I18n.t('files.new.add_file')
+      }.to change {
+        Node.count
+      }.by(1)
+    end
   end
 
 end

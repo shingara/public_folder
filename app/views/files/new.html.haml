@@ -1,0 +1,6 @@
+= simple_form_for(file, :url => files_path, :html => {:multipart => true, :class => 'form-horizontal' , :id => 'new_file'}) do |form|
+  %legend= t('.new_file')
+  %fieldset
+    = form.hidden_field :dirname
+    = form.input :content, :type => :file
+    = form.button :submit, t('.add_file')

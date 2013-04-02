@@ -33,6 +33,20 @@ class Node < ActiveRecord::Base
     end
   end
 
+  def dirname=(path)
+    self.parent = Node.get(path)
+  end
+
+  def dirname
+    @dirname ||= parent.full_path
+  end
+
+  def content=(file)
+    filesystem.file = file
+    filesystem.save
+  end
+  attr_reader :content
+
   def self.get(path)
     path = (path || '').split('/')
     return base_directory if path.empty?
@@ -45,6 +59,12 @@ class Node < ActiveRecord::Base
 
   def self.base_directory
     Directory.where(:name => '', :full_path => '', :parent_id => nil).first_or_create
+  end
+
+  private
+
+  def filesystem
+    @filesystem ||= FileSystem.new(self)
   end
 
 end
