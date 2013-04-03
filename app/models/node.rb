@@ -1,5 +1,5 @@
 class Node < ActiveRecord::Base
-  attr_accessible :file_type, :name, :dirname
+  attr_accessible :file_type, :name, :dirname, :content
 
   validates_presence_of :file_type, :size
   validates_uniqueness_of :name, :scope => :parent_id
@@ -19,7 +19,7 @@ class Node < ActiveRecord::Base
 
   def paths
     if parent
-      parent.paths | [ name ]
+      parent.paths + [ name ]
     else
       [ name ]
     end
@@ -33,10 +33,30 @@ class Node < ActiveRecord::Base
     end
   end
 
+  def dirname=(path)
+    self.parent = Node.get(path)
+    @dirname = path
+  end
+
+  def dirname
+    @dirname ||= parent.full_path
+  end
+
+  def content=(file)
+    filesystem.file = file
+    filesystem.save
+  end
+  def content
+    filesystem.path
+  end
+
+  def directory?
+    false
+  end
+
   def self.get(path)
     path = (path || '').split('/')
     return base_directory if path.empty?
-    path = [''] + path if path[0] != '' # full_path need start by /
     Node.where(
       :name => path.last,
       :full_path => path.join('/')
@@ -45,6 +65,12 @@ class Node < ActiveRecord::Base
 
   def self.base_directory
     Directory.where(:name => '', :full_path => '', :parent_id => nil).first_or_create
+  end
+
+  private
+
+  def filesystem
+    @filesystem ||= FileSystem.new(self)
   end
 
 end

@@ -57,6 +57,7 @@ PublicFolder::Application.routes.draw do
   # match ':controller(/:action(/:id))(.:format)'
 
   resources :directories, :only => [:new, :create]
+  resources :files, :only => [:new, :create]
   root :to => 'nodes#index'
   get '/(*path)' => 'nodes#index'
 end
