@@ -5,7 +5,7 @@ describe NodesController do
   describe "GET :index" do
     context "without directory found" do
       before do
-        Node.should_receive(:get).with(["foo"]).and_return(nil)
+        Node.should_receive(:get).with("/foo").and_return(nil)
       end
 
       it {
@@ -17,7 +17,7 @@ describe NodesController do
 
     context "with directory found" do
       before do
-        Node.should_receive(:get).with(["foo"]).and_return(Directory.new)
+        Node.should_receive(:get).with("/foo").and_return(Directory.new)
       end
 
       it {

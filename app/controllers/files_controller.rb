@@ -11,7 +11,7 @@ class FilesController < ApplicationController
 
   def create
     if file.save
-      redirect_to file_decorate.url
+      redirect_to file_decorate.directory_url
     else
       render :new
     end

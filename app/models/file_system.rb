@@ -13,6 +13,10 @@ class FileSystem < Struct.new(:node)
     node.save
   end
 
+  def path
+    File.join(dirname, node.name)
+  end
+
   private
 
   def save_file
@@ -27,8 +31,5 @@ class FileSystem < Struct.new(:node)
     )
   end
 
-  def path
-    File.join(dirname, node.name)
-  end
 
 end

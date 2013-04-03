@@ -11,12 +11,12 @@ class NodeDecorator < Draper::Decorator
   end
 
   def directory_decorate
-    if model.directory?
-      DirectoryDecorator.new(model)
-    else
-      DirectoryDecorator.new(model.parent)
-    end
+    DirectoryDecorator.new(model)
   end
   delegate :url, :to => :directory_decorate
+
+  def directory_url
+    DirectoryDecorator.new(model.parent).url
+  end
 
 end

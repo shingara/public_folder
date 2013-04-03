@@ -43,20 +43,34 @@ describe Node do
     end
   end
 
+  describe "#paths" do
+    it 'return the path in form of array' do
+      d1 = create_directory('foo')
+      d2 = Directory.create(:name => 'bar', :dirname => '/foo')
+      d3 = Directory.create(:name => 'foo', :dirname => '/foo/bar')
+      expect(d3.paths).to eq ['', 'foo', 'bar', 'foo']
+    end
+  end
+
+  describe "#parents" do
+    it 'return the parents in form of array' do
+      d1 = create_directory('foo')
+      d2 = Directory.create(:name => 'bar', :dirname => '/foo')
+      d3 = Directory.create(:name => 'foo', :dirname => '/foo/bar')
+      expect(d3.parents).to eq [Node.base_directory, d1, d2]
+    end
+  end
+
   describe ".get" do
     context "on first level" do
       let!(:directory) { create_directory('foo') }
 
       it 'with path known' do
-        expect(Node.get('foo')).to eq directory
+        expect(Node.get('/foo')).to eq directory
       end
 
-      it 'with path known' do
-        expect(Node.get('foo')).to eq directory
-      end
-
-      it 'with path known' do
-        expect(Node.get('bar')).to eq nil
+      it 'with path unknown' do
+        expect(Node.get('/bar')).to eq nil
       end
 
     end
@@ -72,18 +86,18 @@ describe Node do
       }
 
       it 'with path known' do
-        expect(Node.get('bar/foo')).to eq directory
+        expect(Node.get('/bar/foo')).to eq directory
       end
 
       it 'with unknown path' do
-        expect(Node.get('bar/bar')).to eq nil
+        expect(Node.get('/bar/bar')).to eq nil
       end
     end
 
     context "without base node and request it" do
       it 'create node master' do
         expect{
-          Node.get('')
+          Node.get('/')
         }.to change {
           Node.count
         }.from(0).to(1)
@@ -100,7 +114,7 @@ describe Node do
       context "if exist" do
         let!(:node) { Directory.create!(:name => '') }
         it 'get it' do
-          expect(Node.get('')).to eq node
+          expect(Node.get('/')).to eq node
         end
 
       end

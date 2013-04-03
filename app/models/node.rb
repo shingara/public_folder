@@ -19,7 +19,7 @@ class Node < ActiveRecord::Base
 
   def paths
     if parent
-      parent.paths | [ name ]
+      parent.paths + [ name ]
     else
       [ name ]
     end
@@ -46,7 +46,9 @@ class Node < ActiveRecord::Base
     filesystem.file = file
     filesystem.save
   end
-  attr_reader :content
+  def content
+    filesystem.path
+  end
 
   def directory?
     false
@@ -55,7 +57,6 @@ class Node < ActiveRecord::Base
   def self.get(path)
     path = (path || '').split('/')
     return base_directory if path.empty?
-    path = [''] + path if path[0] != '' # full_path need start by /
     Node.where(
       :name => path.last,
       :full_path => path.join('/')

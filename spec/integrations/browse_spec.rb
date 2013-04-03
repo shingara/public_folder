@@ -21,12 +21,11 @@ feature "Browse and update directory" do
         I18n.t('simple_form.labels.node.content'),
         Rails.root.join('app/assets/images/rails.png')
       )
-      expect {
-        click_on I18n.t('files.new.add_file')
-      }.to change {
-        Node.count
-      }.by(1)
+      click_on I18n.t('files.new.add_file')
     end
+    page.should have_css 'ul.breadcrumb li', :text => 'foo'
+    click_on 'rails.png'
+    expect(page.source.force_encoding('ascii')).to eq File.read(Rails.root.join('app/assets/images/rails.png')).force_encoding('ascii')
   end
 
 end
