@@ -21,7 +21,7 @@ class FileSystem < Struct.new(:node)
 
   def save_file
     FileUtils.mkdir_p(dirname)
-    FileUtils.mv(@file.path, path)
+    FileUtils.cp(@file.path, path)
   end
 
   def dirname
