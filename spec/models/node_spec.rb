@@ -65,30 +65,39 @@ describe Node do
   describe "#order_childs" do
     let!(:directory) { create_directory('foo') }
     let!(:directory_1) { create_directory_from_parent('baz', directory) }
-    let!(:directory_2) { create_directory_from_parent('bar', directory) }
     let!(:file_1) { create_node_from_parent('hello.png', 'foo bar', directory) }
     let!(:file_2) { create_node_from_parent('foo.jpg', 'foo', directory) }
 
-    it 'order by name by default' do
-      expect(directory.order_childs).to eq [
-        directory_2, directory_1, file_2, file_1
-      ]
+    context "order by name" do
+      let!(:directory_2) { create_directory_from_parent('bar', directory) }
+      it 'return ordered' do
+        expect(directory.order_childs).to eq [
+          directory_2, directory_1, file_2, file_1
+        ]
+      end
     end
 
-    it 'order by created_at' do
-      expect(directory.order_childs('date')).to eq [directory_1, directory_2, file_1, file_2]
+    context "order by created_at" do
+      it 'return ordered' do
+        expect(directory.order_childs('date')).to eq [directory_1, file_1, file_2]
+      end
     end
 
-    it 'order by type' do
-      expect(directory.order_childs('type')).to eq [
-        file_2, file_1, directory_2, directory_1
-      ]
+    context "order by type" do
+      it 'return ordered' do
+
+        expect(directory.order_childs('type')).to eq [
+          file_2, file_1, directory_1
+        ]
+      end
     end
 
-    it 'order by size' do
-      expect(directory.order_childs('size')).to eq [
-        directory_2, directory_1, file_2, file_1
-      ]
+    context 'order by size' do
+      it 'return orderered' do
+        expect(directory.order_childs('size')).to eq [
+          directory_1, file_2, file_1
+        ]
+      end
     end
   end
 
