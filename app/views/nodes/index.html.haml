@@ -10,15 +10,25 @@
   = link_to t('.add_directory'), new_directory_url(:dirname => node_decorate.full_path), :class => 'btn btn-primary'
   = link_to t('.add_file'), new_file_url(:dirname => node_decorate.full_path), :class => 'btn btn-primary'
 
+.row
+  %ul.nav.nav-pills.pull-right
+    %li{:class => 'disabled'}=link_to 'Order by :'
+    %li{:class => node_decorate.order_active?('name')}= node_decorate.order_by_link('name')
+    %li{:class => node_decorate.order_active?('type')}= node_decorate.order_by_link('type')
+    %li{:class => node_decorate.order_active?('date')}= node_decorate.order_by_link('date')
+    %li{:class => node_decorate.order_active?('size')}= node_decorate.order_by_link('size')
+
 %table.table.table-striped
   %thead
     %tr
       %th Name
       %th Type
+      %th Date
       %th Size
   %tbody
-    - node_decorate.ls.each do |n|
+    - node_decorate.ls(params[:order]).each do |n|
       %tr
         %td= n.name
         %td= n.file_type
+        %td= n.created_at
         %td= n.size

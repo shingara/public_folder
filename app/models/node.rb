@@ -13,6 +13,21 @@ class Node < ActiveRecord::Base
     paths.join('/')
   end
 
+  def valid_order(order='')
+    case order
+    when 'date'
+      'created_at'
+    when 'type'
+      'file_type'
+    else
+      order.blank? ? 'name' : order
+    end
+  end
+
+  def order_childs(order='name')
+    childs.order(valid_order(order))
+  end
+
   def update_full_path
     self.full_path = full_path
   end

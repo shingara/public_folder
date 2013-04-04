@@ -19,4 +19,8 @@ class NodeDecorator < Draper::Decorator
     DirectoryDecorator.new(model.parent).url
   end
 
+  def created_at
+    I18n.l(model.created_at)
+  end
+
 end

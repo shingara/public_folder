@@ -21,3 +21,11 @@ en:
   directories:
     new:
       create_directory: Create directory
+
+  decorator:
+    node:
+      order:
+        name: Name
+        type: Type
+        date: Date
+        size: Size
